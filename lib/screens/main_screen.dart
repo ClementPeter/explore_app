@@ -1,3 +1,4 @@
+import 'package:explore_app/constants/enums.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -19,9 +20,14 @@ class _MainScreenState extends State<MainScreen> {
       context: context,
       backgroundColor: const Color(0xFFFFFFFF),
       shape: const RoundedRectangleBorder(
-          borderRadius: BorderRadius.vertical(top: Radius.circular(30))),
+        borderRadius: BorderRadius.vertical(
+          top: Radius.circular(30),
+        ),
+      ),
       builder: (context) {
         return Container(
+          height: MediaQuery.of(context).size.height * 0.9,
+          width: double.maxFinite,
           margin: const EdgeInsets.all(24),
           decoration: const BoxDecoration(
             borderRadius: BorderRadius.only(
@@ -34,9 +40,13 @@ class _MainScreenState extends State<MainScreen> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Text('Languages',
-                      style:
-                          TextStyle(fontSize: 14, fontWeight: FontWeight.bold)),
+                  const Text(
+                    'Languages',
+                    style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                        fontFamily: 'Axiforma'),
+                  ),
                   InkWell(
                     onTap: () {
                       Navigator.pop(context);
@@ -45,17 +55,55 @@ class _MainScreenState extends State<MainScreen> {
                       height: 30.h,
                       width: 30.w,
                       decoration: const BoxDecoration(
-                          color: Color(0xff98A2B3),
-                          borderRadius: BorderRadius.all(Radius.circular(2))),
-                      child: const Icon(Icons.close),
+                        color: Color(0xff98A2B3),
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(5),
+                        ),
+                      ),
+                      child: const Icon(Icons.close, size: 20),
                     ),
                   ),
                 ],
+              ),
+              Expanded(
+                child: ListView(
+                  children: [
+                    languageListTile(0, CountryLanguages.behasa),
+                    languageListTile(1, CountryLanguages.chinese),
+                    languageListTile(2, CountryLanguages.deutsch),
+                    languageListTile(3, CountryLanguages.english),
+                    languageListTile(4, CountryLanguages.espanol),
+                    languageListTile(5, CountryLanguages.french),
+                    languageListTile(6, CountryLanguages.italiano),
+                    languageListTile(7, CountryLanguages.portuguese),
+                    languageListTile(8, CountryLanguages.pycckua),
+                    languageListTile(9, CountryLanguages.svenska),
+                    languageListTile(10, CountryLanguages.turkce),
+                  ],
+                ),
               )
             ],
           ),
         );
       },
+    );
+  }
+
+  languageListTile(int index, CountryLanguages value) {
+    //convert the enums values to List<String>
+    List<String> _enumValues =
+        CountryLanguages.values.map((e) => e.name).toList();
+
+    return RadioListTile(
+      value: value,
+      groupValue: CountryLanguages.chinese,
+      //onChanged: null,
+      title: Text(_enumValues[index]),
+      onChanged: (CountryLanguages? value) {
+        print(":::$value is selected::::");
+      },
+      activeColor: Colors.amber,
+      controlAffinity: ListTileControlAffinity.trailing,
     );
   }
 
@@ -91,13 +139,24 @@ class _MainScreenState extends State<MainScreen> {
                     onTap: () {
                       Navigator.pop(context);
                     },
+                    // child: Container(
+                    //   height: 30.h,
+                    //   width: 30.w,
+                    //   decoration: const BoxDecoration(
+                    //       color: Color(0xff98A2B3),
+                    //       borderRadius: BorderRadius.all(Radius.circular(2))),
+                    //   child: const Icon(Icons.close),
+                    // ),
                     child: Container(
                       height: 30.h,
                       width: 30.w,
                       decoration: const BoxDecoration(
-                          color: Color(0xff98A2B3),
-                          borderRadius: BorderRadius.all(Radius.circular(2))),
-                      child: const Icon(Icons.close),
+                        color: Color(0xff98A2B3),
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(5),
+                        ),
+                      ),
+                      child: const Icon(Icons.close, size: 20),
                     ),
                   ),
                 ],
